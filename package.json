@@ -7,7 +7,7 @@
     "db-seed": "prisma db seed",
     "db-migrate-dev": "yarn prisma migrate dev",
     "dev": "next dev",
-    "dx": "run-s db-migrate-dev db-seed dev",
+    "dx": "run-s db-migrate-dev dev",
     "start": "next start",
     "ts-node": "ts-node --compiler-options \"{\\\"module\\\":\\\"commonjs\\\"}\"",
     "postinstall": "prisma generate"
