@@ -4,7 +4,6 @@
     "build:1-migrate": "prisma migrate deploy",
     "build:2-build": "next build",
     "build": "run-s build:*",
-    "db-seed": "prisma db seed",
     "db-migrate-dev": "yarn prisma migrate dev",
     "dev": "next dev",
     "dx": "run-s db-migrate-dev dev",
@@ -12,10 +11,8 @@
     "ts-node": "ts-node --compiler-options \"{\\\"module\\\":\\\"commonjs\\\"}\"",
     "postinstall": "prisma generate"
   },
-  "prisma": {
-    "seed": "yarn ts-node prisma/seed.ts"
-  },
   "dependencies": {
+    "@notionhq/client": "^2.1.1",
     "@prisma/client": "^3.0.1",
     "@trpc/client": "^9.27.0",
     "@trpc/next": "^9.27.0",
