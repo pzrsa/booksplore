@@ -1,3 +1,4 @@
+import type { GetStaticProps } from "next/types";
 import { NextPageWithLayout } from "./_app";
 
 const IndexPage: NextPageWithLayout = () => {
@@ -9,6 +10,12 @@ const IndexPage: NextPageWithLayout = () => {
       <h2>Books</h2>
     </>
   );
+};
+
+export const getStaticProps: GetStaticProps = async () => {
+  return {
+    props: {},
+  };
 };
 
 export default IndexPage;
