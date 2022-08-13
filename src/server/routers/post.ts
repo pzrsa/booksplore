@@ -2,11 +2,11 @@
  *
  * This is an example router, you can delete this file and then update `../pages/api/trpc/[trpc].tsx`
  */
-import { Prisma } from '@prisma/client';
-import { TRPCError } from '@trpc/server';
-import { z } from 'zod';
-import { createRouter } from '~/server/createRouter';
-import { prisma } from '~/server/prisma';
+import { Prisma } from "@prisma/client";
+import { TRPCError } from "@trpc/server";
+import { z } from "zod";
+import { createRouter } from "../../server/createRouter";
+import { prisma } from "../../server/prisma";
 
 /**
  * Default selector for Post.
@@ -23,7 +23,7 @@ const defaultPostSelect = Prisma.validator<Prisma.PostSelect>()({
 
 export const postRouter = createRouter()
   // create
-  .mutation('add', {
+  .mutation("add", {
     input: z.object({
       id: z.string().uuid().optional(),
       title: z.string().min(1).max(32),
@@ -38,7 +38,7 @@ export const postRouter = createRouter()
     },
   })
   // read
-  .query('all', {
+  .query("all", {
     async resolve() {
       /**
        * For pagination you can have a look at this docs site
@@ -50,7 +50,7 @@ export const postRouter = createRouter()
       });
     },
   })
-  .query('byId', {
+  .query("byId", {
     input: z.object({
       id: z.string(),
     }),
@@ -62,7 +62,7 @@ export const postRouter = createRouter()
       });
       if (!post) {
         throw new TRPCError({
-          code: 'NOT_FOUND',
+          code: "NOT_FOUND",
           message: `No post with id '${id}'`,
         });
       }
@@ -70,7 +70,7 @@ export const postRouter = createRouter()
     },
   })
   // update
-  .mutation('edit', {
+  .mutation("edit", {
     input: z.object({
       id: z.string().uuid(),
       data: z.object({
@@ -89,7 +89,7 @@ export const postRouter = createRouter()
     },
   })
   // delete
-  .mutation('delete', {
+  .mutation("delete", {
     input: z.object({
       id: z.string(),
     }),

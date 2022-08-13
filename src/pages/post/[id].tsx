@@ -1,11 +1,11 @@
-import NextError from 'next/error';
-import { useRouter } from 'next/router';
-import { NextPageWithLayout } from '~/pages/_app';
-import { trpc } from '~/utils/trpc';
+import NextError from "next/error";
+import { useRouter } from "next/router";
+import { NextPageWithLayout } from "../../pages/_app";
+import { trpc } from "../../utils/trpc";
 
 const PostViewPage: NextPageWithLayout = () => {
   const id = useRouter().query.id as string;
-  const postQuery = trpc.useQuery(['post.byId', { id }]);
+  const postQuery = trpc.useQuery(["post.byId", { id }]);
 
   if (postQuery.error) {
     return (
@@ -16,14 +16,14 @@ const PostViewPage: NextPageWithLayout = () => {
     );
   }
 
-  if (postQuery.status !== 'success') {
+  if (postQuery.status !== "success") {
     return <>Loading...</>;
   }
   const { data } = postQuery;
   return (
     <>
       <h1>{data.title}</h1>
-      <em>Created {data.createdAt.toLocaleDateString('en-us')}</em>
+      <em>Created {data.createdAt.toLocaleDateString("en-us")}</em>
 
       <p>{data.text}</p>
 

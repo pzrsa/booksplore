@@ -6,9 +6,9 @@ import { AppProps } from "next/app";
 import { AppType } from "next/dist/shared/lib/utils";
 import { ReactElement, ReactNode } from "react";
 import superjson from "superjson";
-import { DefaultLayout } from "~/components/DefaultLayout";
-import { AppRouter } from "~/server/routers/_app";
-import { SSRContext } from "~/utils/trpc";
+import { DefaultLayout } from "../components/DefaultLayout";
+import { AppRouter } from "../server/routers/_app";
+import { SSRContext } from "../utils/trpc";
 
 export type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -32,11 +32,6 @@ function getBaseUrl() {
   // reference for vercel.com
   if (process.env.VERCEL_URL) {
     return `https://${process.env.VERCEL_URL}`;
-  }
-
-  // // reference for render.com
-  if (process.env.RENDER_INTERNAL_HOSTNAME) {
-    return `http://${process.env.RENDER_INTERNAL_HOSTNAME}:${process.env.PORT}`;
   }
 
   // assume localhost
