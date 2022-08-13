@@ -15,8 +15,38 @@ model Post {
   title String
   text  String
 
-  // To return `Date`s intact through the API we need to add data transformers
-  // https://trpc.io/docs/data-transformers
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+}
+
+model Book {
+  id       Int    @id @default(autoincrement())
+  title    String
+  author   Author @relation(fields: [authorId], references: [id])
+  authorId Int
+  genre    Genre  @relation(fields: [genreId], references: [id])
+  genreId  Int
+  isbn13   Int
+  asin     String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+}
+
+model Author {
+  id    Int    @id @default(autoincrement())
+  name  String
+  books Book[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+}
+
+model Genre {
+  id    Int    @id @default(autoincrement())
+  name  String
+  books Book[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
 }
