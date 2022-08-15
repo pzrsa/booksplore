@@ -5,12 +5,16 @@
     "build:2-build": "next build",
     "build": "run-s build:*",
     "db-migrate-dev": "yarn prisma migrate dev",
+    "db-seed": "prisma db seed",
     "dev": "next dev",
-    "dx": "run-s db-migrate-dev dev",
+    "dx": "run-s db-migrate-dev db-seed dev",
     "start": "next start",
     "ts-node": "ts-node --compiler-options \"{\\\"module\\\":\\\"commonjs\\\"}\"",
     "postinstall": "prisma generate",
     "vercel-build": "prisma generate && prisma migrate deploy && next build"
+  },
+  "prisma": {
+    "seed": "yarn ts-node prisma/seed.ts"
   },
   "dependencies": {
     "@notionhq/client": "^2.1.1",
