@@ -1,7 +1,6 @@
 import { Prisma } from "@prisma/client";
 import Image from "next/image";
 import type { InferGetStaticPropsType } from "next/types";
-import { populateDatabase } from "utils/notion";
 import { prisma } from "../utils/prisma";
 
 const defaultBookSelect = Prisma.validator<Prisma.BookSelect>()({
@@ -40,11 +39,11 @@ const IndexPage = ({
 };
 
 export const getStaticProps = async () => {
-  try {
-    await populateDatabase();
-  } catch (err) {
-    console.error(err);
-  }
+  // try {
+  //   await populateDatabase();
+  // } catch (err) {
+  //   console.error(err);
+  // }
 
   const books = await prisma.book.findMany({ select: defaultBookSelect });
 
