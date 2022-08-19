@@ -28,9 +28,14 @@ const IndexPage = ({
 
   if (status === "unauthenticated") {
     authStatus = (
-      <button onClick={async () => await signIn("google")}>
-        sign in with google
-      </button>
+      <div>
+        <button onClick={async () => await signIn("google")}>
+          sign in with google
+        </button>
+        <button onClick={async () => await signIn("twitter")}>
+          sign in with twitter
+        </button>
+      </div>
     );
   }
 
