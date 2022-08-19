@@ -10,8 +10,7 @@
     "dx": "run-s db-migrate-dev db-seed dev",
     "start": "next start",
     "ts-node": "ts-node --compiler-options \"{\\\"module\\\":\\\"commonjs\\\"}\"",
-    "postinstall": "prisma generate",
-    "vercel-build": "prisma generate && prisma migrate deploy && next build"
+    "postinstall": "prisma generate"
   },
   "prisma": {
     "seed": "yarn ts-node prisma/seed.ts"
