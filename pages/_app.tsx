@@ -1,4 +1,5 @@
 import { NextPage } from "next";
+import { SessionProvider } from "next-auth/react";
 import { AppProps } from "next/app";
 import { AppType } from "next/dist/shared/lib/utils";
 import { ReactElement, ReactNode } from "react";
@@ -12,8 +13,17 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
-const MyApp = (({ Component, pageProps }: AppPropsWithLayout) => {
-  const getLayout = Component.getLayout ?? ((page) => <Layout>{page}</Layout>);
+const MyApp = (({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppPropsWithLayout) => {
+  const getLayout =
+    Component.getLayout ??
+    ((page) => (
+      <SessionProvider session={session}>
+        <Layout>{page}</Layout>
+      </SessionProvider>
+    ));
 
   return getLayout(<Component {...pageProps} />);
 }) as AppType;
