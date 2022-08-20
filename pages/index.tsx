@@ -1,9 +1,10 @@
-import { Prisma } from "@prisma/client";
 import csvParser from "csv-parser";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
 import type { InferGetStaticPropsType } from "next/types";
 import { prisma } from "utils/prisma";
+import { Book, defaultBookSelect } from "utils/types";
 
 const IndexPage = ({
   books,
@@ -56,45 +57,22 @@ const IndexPage = ({
       <h2>Books</h2>
       {books.map((book) => (
         <div key={book.id}>
-          <Image
-            src={`https://images-eu.ssl-images-amazon.com/images/P/${book.asin}._LZZZZZZZ_.jpg`}
-            width={400}
-            height={600}
-            alt={`${book.title} Cover`}
-          />
-          <h1>{book.title}</h1>
+          <Link href={`/b/${book.isbn13}`} passHref>
+            <a>
+              <Image
+                src={`https://images-eu.ssl-images-amazon.com/images/P/${book.asin}._LZZZZZZZ_.jpg`}
+                width={400}
+                height={600}
+                alt={`${book.title} Cover`}
+              />
+              <h1>{book.title}</h1>
+            </a>
+          </Link>
         </div>
       ))}
     </>
   );
 };
-
-type Book = {
-  title: string;
-  author: string;
-  genre: string;
-  isbn13: string;
-  asin: string;
-};
-
-const defaultBookSelect = Prisma.validator<Prisma.BookSelect>()({
-  id: true,
-  title: true,
-  authorId: true,
-  author: {
-    select: {
-      id: true,
-      name: true,
-      books: false,
-      createdAt: false,
-      updatedAt: false,
-    },
-  },
-  asin: true,
-  isbn13: true,
-  createdAt: false,
-  updatedAt: false,
-});
 
 export const getStaticProps = async () => {
   const res = await fetch(
