@@ -4,6 +4,7 @@ import { AppProps } from "next/app";
 import { AppType } from "next/dist/shared/lib/utils";
 import { ReactElement, ReactNode } from "react";
 import { Layout } from "../components/Layout";
+import "../styles/globals.css";
 
 export type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
