@@ -16,7 +16,6 @@ model Post {
   text  String
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt
 
   @@map("posts")
 }
@@ -31,7 +30,6 @@ model Book {
   asin     String @unique
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt
 
   @@map("books")
 }
@@ -42,7 +40,6 @@ model Author {
   books Book[]
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt
 
   @@map("authors")
 }

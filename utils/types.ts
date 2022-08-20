@@ -11,13 +11,11 @@ export const defaultBookSelect = Prisma.validator<Prisma.BookSelect>()({
       name: true,
       books: false,
       createdAt: false,
-      updatedAt: false,
     },
   },
   asin: true,
   isbn13: true,
   createdAt: false,
-  updatedAt: false,
 });
 
 export type Book = {
