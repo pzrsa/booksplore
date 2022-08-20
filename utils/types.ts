@@ -3,6 +3,7 @@ import { Prisma } from "@prisma/client";
 export const defaultBookSelect = Prisma.validator<Prisma.BookSelect>()({
   id: true,
   title: true,
+  genre: true,
   authorId: true,
   author: {
     select: {

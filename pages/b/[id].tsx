@@ -1,13 +1,41 @@
-import { GetStaticPaths, GetStaticProps } from "next";
+import type {
+  GetStaticPaths,
+  GetStaticPropsContext,
+  InferGetStaticPropsType,
+} from "next";
+import Image from "next/image";
+import Link from "next/link";
 import { prisma } from "utils/prisma";
-import { Book, defaultBookSelect } from "utils/types";
+import { defaultBookSelect } from "utils/types";
 
-type BookProps = {
-  book: Book;
-};
+const Book = ({ book }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  return (
+    <>
+      <Link href={"/"} passHref>
+        <a>
+          <h3>go back</h3>
+        </a>
+      </Link>
 
-const Book: React.FC<BookProps> = ({ book }) => {
-  return <>{JSON.stringify(book, null, 2)}</>;
+      <Image
+        src={`https://images-eu.ssl-images-amazon.com/images/P/${book?.asin}._LZZZZZZZ_.jpg`}
+        width={400}
+        height={600}
+        alt={`${book?.title} Cover`}
+      />
+      <h1>{book?.title}</h1>
+      <h2>by {book?.author.name}</h2>
+      <h3>{book?.genre}</h3>
+      <button>save</button>
+      <a
+        href={`http://amazon.co.uk/dp/${book?.asin}`}
+        rel="prefetch noreferrer"
+        target="_blank"
+      >
+        <p>buy on amazon uk</p>
+      </a>
+    </>
+  );
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -17,7 +45,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return { paths, fallback: false };
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
   const book = await prisma.book.findFirst({
     select: defaultBookSelect,
     where: { isbn13: params?.id as string },

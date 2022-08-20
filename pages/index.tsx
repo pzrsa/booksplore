@@ -66,6 +66,8 @@ const IndexPage = ({
                 alt={`${book.title} Cover`}
               />
               <h1>{book.title}</h1>
+              <h2>by {book.author.name}</h2>
+              <h3>{book.genre}</h3>
             </a>
           </Link>
         </div>
