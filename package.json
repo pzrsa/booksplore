@@ -7,13 +7,10 @@
     "db-migrate-dev": "yarn prisma migrate dev",
     "db-seed": "prisma db seed",
     "dev": "next dev",
-    "dx": "run-s db-migrate-dev db-seed dev",
+    "dx": "run-s db-migrate-dev dev",
     "start": "next start",
     "ts-node": "ts-node --compiler-options \"{\\\"module\\\":\\\"commonjs\\\"}\"",
     "postinstall": "prisma generate"
-  },
-  "prisma": {
-    "seed": "yarn ts-node prisma/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^4.2.1",

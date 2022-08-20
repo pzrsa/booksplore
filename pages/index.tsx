@@ -1,19 +1,9 @@
 import { Prisma } from "@prisma/client";
+import csvParser from "csv-parser";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import type { InferGetStaticPropsType } from "next/types";
-import { prisma } from "../utils/prisma";
-
-const defaultBookSelect = Prisma.validator<Prisma.BookSelect>()({
-  id: true,
-  title: true,
-  authorId: true,
-  genreId: true,
-  asin: true,
-  isbn13: true,
-  createdAt: false,
-  updatedAt: false,
-});
+import { prisma } from "utils/prisma";
 
 const IndexPage = ({
   books,
@@ -48,7 +38,9 @@ const IndexPage = ({
           height={100}
           alt={`${session.user} image`}
         />
-        <p>welcome back, {session.user?.name}</p>
+        <p>
+          welcome back, {session.user?.name} ({session.user?.email})
+        </p>
         <button onClick={async () => await signOut({ redirect: false })}>
           sign out
         </button>
@@ -70,19 +62,72 @@ const IndexPage = ({
             height={600}
             alt={`${book.title} Cover`}
           />
-          <p>{book.title}</p>
+          <h1>{book.title}</h1>
         </div>
       ))}
     </>
   );
 };
 
+type Book = {
+  title: string;
+  author: string;
+  genre: string;
+  isbn13: string;
+  asin: string;
+};
+
+const defaultBookSelect = Prisma.validator<Prisma.BookSelect>()({
+  id: true,
+  title: true,
+  authorId: true,
+  author: {
+    select: {
+      id: true,
+      name: true,
+      books: false,
+      createdAt: false,
+      updatedAt: false,
+    },
+  },
+  asin: true,
+  isbn13: true,
+  createdAt: false,
+  updatedAt: false,
+});
+
 export const getStaticProps = async () => {
-  // try {
-  //   await populateDatabase();
-  // } catch (err) {
-  //   console.error(err);
-  // }
+  const res = await fetch(
+    `https://docs.google.com/spreadsheets/d/${process.env.SHEETS_ID}/gviz/tq?tqx=out:csv&sheet=sheet1`
+  );
+
+  const allBooks: Book[] = [];
+  const data = (await res.blob()).stream();
+  data
+    .pipe(csvParser())
+    .on("data", (data) => allBooks.push(data))
+    .on("end", () => {
+      allBooks.map(async (book) => {
+        const author = await prisma.author.upsert({
+          where: { name: book.author },
+          create: { name: book.author },
+          update: {},
+        });
+        await prisma.book.upsert({
+          where: {
+            isbn13: book.isbn13,
+          },
+          create: {
+            title: book.title,
+            authorId: author.id,
+            genre: book.genre,
+            isbn13: book.isbn13,
+            asin: book.asin,
+          },
+          update: {},
+        });
+      });
+    });
 
   const books = await prisma.book.findMany({ select: defaultBookSelect });
 
