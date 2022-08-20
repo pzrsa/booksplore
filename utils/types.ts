@@ -13,6 +13,7 @@ export const defaultBookSelect = Prisma.validator<Prisma.BookSelect>()({
       createdAt: false,
     },
   },
+  saves: true,
   asin: true,
   isbn13: true,
   createdAt: false,

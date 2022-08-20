@@ -55,23 +55,27 @@ const IndexPage = ({
       <p>Explore your next read.</p>
       {authStatus}
       <h2>Books</h2>
-      {books.map((book) => (
-        <div key={book.id}>
-          <Link href={`/b/${book.isbn13}`} passHref>
-            <a>
-              <Image
-                src={`https://images-eu.ssl-images-amazon.com/images/P/${book.asin}._LZZZZZZZ_.jpg`}
-                width={400}
-                height={600}
-                alt={`${book.title} Cover`}
-              />
-              <h1>{book.title}</h1>
-              <h2>by {book.author.name}</h2>
-              <h3>{book.genre}</h3>
-            </a>
-          </Link>
-        </div>
-      ))}
+      <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+        {books.map((book) => (
+          <div key={book.id}>
+            <Link href={`/b/${book.isbn13}`} passHref>
+              <a>
+                <div className="aspect-w-4 aspect-h-6">
+                  <Image
+                    src={`https://images-eu.ssl-images-amazon.com/images/P/${book.asin}._LZZZZZZZ_.jpg`}
+                    alt={`${book.title} Cover`}
+                    layout={"fill"}
+                  />
+                </div>
+                <h1 className={"text-xl"}>
+                  {book.title} • {book.author.name}
+                </h1>
+                <h3 className={"text-lg"}>{book.genre}</h3>
+              </a>
+            </Link>
+          </div>
+        ))}
+      </div>
     </>
   );
 };
