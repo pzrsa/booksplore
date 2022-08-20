@@ -1,5 +1,4 @@
 import csvParser from "csv-parser";
-import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import type { InferGetStaticPropsType } from "next/types";
@@ -9,52 +8,8 @@ import { Book, defaultBookSelect } from "utils/types";
 const IndexPage = ({
   books,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const { data: session, status } = useSession();
-
-  let authStatus;
-
-  if (status === "loading") {
-    authStatus = <p>loading...</p>;
-  }
-
-  if (status === "unauthenticated") {
-    authStatus = (
-      <div>
-        <button onClick={async () => await signIn("google")}>
-          sign in with google
-        </button>
-        <button onClick={async () => await signIn("twitter")}>
-          sign in with twitter
-        </button>
-      </div>
-    );
-  }
-
-  if (status === "authenticated") {
-    authStatus = (
-      <div>
-        <Image
-          src={`${session.user?.image}`}
-          width={100}
-          height={100}
-          alt={`${session.user} image`}
-        />
-        <p>
-          welcome back, {session.user?.name} ({session.user?.email})
-        </p>
-        <button onClick={async () => await signOut({ redirect: false })}>
-          sign out
-        </button>
-      </div>
-    );
-  }
-
   return (
     <>
-      <h1>Booksplore</h1>
-      <p>Explore your next read.</p>
-      {authStatus}
-      <h2>Books</h2>
       <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
         {books.map((book) => (
           <div key={book.id}>
