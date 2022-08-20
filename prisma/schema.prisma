@@ -10,26 +10,17 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Post {
-  id    String @id @default(cuid())
-  title String
-  text  String
-
-  createdAt DateTime @default(now())
-
-  @@map("posts")
-}
-
 model Book {
   id       Int    @id @default(autoincrement())
   title    String @unique
-  author   Author @relation(fields: [authorId], references: [id])
-  authorId Int
+  author   Author @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId Int    @map("author_id")
   genre    String
   isbn13   String @unique
   asin     String @unique
+  saves    Save[]
 
-  createdAt DateTime @default(now())
+  createdAt DateTime @default(now()) @map("created_at")
 
   @@map("books")
 }
@@ -39,7 +30,7 @@ model Author {
   name  String @unique
   books Book[]
 
-  createdAt DateTime @default(now())
+  createdAt DateTime @default(now()) @map("created_at")
 
   @@map("authors")
 }
@@ -84,6 +75,18 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  saves         Save[]
 
   @@map("users")
+}
+
+model Save {
+  id        String  @id @default(cuid())
+  status    Boolean @default(false)
+  creatorId String  @map("creator_id")
+  creator   User    @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+  bookId    Int     @map("book_id")
+  book      Book    @relation(fields: [bookId], references: [id], onDelete: Cascade)
+
+  @@map("saves")
 }
