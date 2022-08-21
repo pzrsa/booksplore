@@ -4,19 +4,29 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import cn from "classnames";
 import { signIn, signOut, useSession } from "next-auth/react";
+import { FiBookmark } from "react-icons/fi";
+import type { IconType } from "react-icons";
 
 type NavItem = {
   href: string;
   text: string;
+  Icon?: IconType;
 };
 
-const NavItem: React.FC<NavItem> = ({ href, text }) => {
+const NavItem: React.FC<NavItem> = ({ href, text, Icon }) => {
   const isActive = useRouter().asPath === href;
 
   return (
     <Link href={href}>
       <a className={cn(isActive ? "font-semibold italic" : "font-normal")}>
-        {text}
+        {Icon ? (
+          <span className={"flex items-center gap-x-1"}>
+            <Icon />
+            {text}
+          </span>
+        ) : (
+          text
+        )}
       </a>
     </Link>
   );
@@ -92,6 +102,8 @@ export const Layout = ({ children }: LayoutProps) => {
           <NavItem href={"/g/lifestyle"} text={"Lifestyle"} />
           <NavItem href={"/g/philosophy"} text={"Philosophy"} />
           <NavItem href={"/g/tech"} text={"Tech"} />
+          <span className={"hidden lg:contents"}>•</span>
+          <NavItem href={"/"} text={"Saved"} Icon={FiBookmark} />
         </div>
 
         <div className={"flex flex-1 justify-end gap-2"}>{authStatus}</div>
