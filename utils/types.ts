@@ -20,7 +20,7 @@ export const defaultBookSelect = Prisma.validator<Prisma.BookSelect>()({
 });
 
 export const defaultUserSelect = Prisma.validator<Prisma.UserSelect>()({
-  id: false,
+  id: true,
   name: true,
   email: true,
   saves: true,
