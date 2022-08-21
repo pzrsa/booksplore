@@ -4,10 +4,50 @@ import type {
   InferGetStaticPropsType,
 } from "next";
 import Image from "next/image";
+import useSWR from "swr";
 import { prisma } from "utils/prisma";
 import { defaultBookSelect } from "utils/types";
+import fetcher from "../../utils/fetcher";
+import { createSave, deleteSave } from "../../utils/save";
 
 const Book = ({ book }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const { data, mutate, error } = useSWR(`/api/save/${book!.id}`, fetcher);
+  let saveStatus;
+
+  if (error) {
+    saveStatus = <p>failed to load</p>;
+  }
+
+  if (!data) {
+    saveStatus = <p>loading...</p>;
+  }
+
+  if (data?.message) {
+    saveStatus = (
+      <button
+        onClick={async () => {
+          await deleteSave(book!.id);
+          await mutate(null);
+        }}
+      >
+        unsave
+      </button>
+    );
+  }
+
+  if (data?.error) {
+    saveStatus = (
+      <button
+        onClick={async () => {
+          await createSave(book!.id);
+          await mutate(null);
+        }}
+      >
+        save
+      </button>
+    );
+  }
+
   return (
     <>
       <Image
@@ -19,7 +59,7 @@ const Book = ({ book }: InferGetStaticPropsType<typeof getStaticProps>) => {
       <h1>{book?.title}</h1>
       <h2>by {book?.author.name}</h2>
       <h3>{book?.genre}</h3>
-      <button>save</button>
+      {saveStatus}
       <a
         href={`http://amazon.co.uk/dp/${book?.asin}`}
         rel="prefetch noreferrer"
@@ -39,7 +79,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
-  const book = await prisma.book.findFirst({
+  const book = await prisma.book.findUnique({
     select: defaultBookSelect,
     where: { isbn13: params?.id as string },
   });
