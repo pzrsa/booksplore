@@ -4,19 +4,12 @@ import type {
   InferGetStaticPropsType,
 } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { prisma } from "utils/prisma";
 import { defaultBookSelect } from "utils/types";
 
 const Book = ({ book }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
-      <Link href={"/"} passHref>
-        <a>
-          <h3>go back</h3>
-        </a>
-      </Link>
-
       <Image
         src={`https://images-eu.ssl-images-amazon.com/images/P/${book?.asin}._LZZZZZZZ_.jpg`}
         width={400}
