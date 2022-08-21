@@ -73,16 +73,28 @@ export const Layout = ({ children }: LayoutProps) => {
   return (
     <>
       <Head>
-        <title>Booksplore</title>
+        <title>Booksplore - Explore your next read</title>
         <link
           rel="icon"
           href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>"
         />
       </Head>
 
-      <nav className={"flex flex-wrap gap-4 mb-6 items-center"}>
-        <NavItem href={"/"} text={"everything"} />
-        <div className={"ml-auto flex flex-wrap gap-2"}>{authStatus}</div>
+      <nav className={"mb-6 flex "}>
+        <div className={"flex flex-col lg:flex-row gap-2"}>
+          <NavItem href={"/"} text={"Everything"} />
+          <NavItem href={"/g/biography"} text={"Biography"} />
+          <NavItem href={"/g/business"} text={"Business"} />
+          <NavItem href={"/g/careers"} text={"Careers"} />
+          <NavItem href={"/g/fiction"} text={"Fiction"} />
+          <NavItem href={"/g/finance"} text={"Finance"} />
+          <NavItem href={"/g/history"} text={"History"} />
+          <NavItem href={"/g/lifestyle"} text={"Lifestyle"} />
+          <NavItem href={"/g/philosophy"} text={"Philosophy"} />
+          <NavItem href={"/g/tech"} text={"Tech"} />
+        </div>
+
+        <div className={"flex flex-1 justify-end gap-2"}>{authStatus}</div>
       </nav>
       <main>{children}</main>
     </>
