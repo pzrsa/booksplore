@@ -11,10 +11,10 @@ generator client {
 }
 
 model Book {
-  id       Int    @id @default(autoincrement())
+  id       String @id @default(cuid())
   title    String @unique
   author   Author @relation(fields: [authorId], references: [id], onDelete: Cascade)
-  authorId Int    @map("author_id")
+  authorId String @map("author_id")
   genre    String
   isbn13   String @unique
   asin     String @unique
@@ -26,7 +26,7 @@ model Book {
 }
 
 model Author {
-  id    Int    @id @default(autoincrement())
+  id    String @id @default(cuid())
   name  String @unique
   books Book[]
 
@@ -85,7 +85,7 @@ model Save {
   status    Boolean @default(false)
   creatorId String  @map("creator_id")
   creator   User    @relation(fields: [creatorId], references: [id], onDelete: Cascade)
-  bookId    Int     @map("book_id")
+  bookId    String     @map("book_id")
   book      Book    @relation(fields: [bookId], references: [id], onDelete: Cascade)
 
   @@map("saves")
