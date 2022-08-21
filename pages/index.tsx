@@ -25,7 +25,11 @@ const IndexPage = ({
                 <h1 className={"text-xl"}>
                   {book.title} • {book.author.name}
                 </h1>
-                <h3 className={"text-lg"}>{book.genre}</h3>
+              </a>
+            </Link>
+            <Link href={`/g/${book.genre}`}>
+              <a>
+                <h3 className={"text-lg capitalize"}>{book.genre}</h3>
               </a>
             </Link>
           </div>
