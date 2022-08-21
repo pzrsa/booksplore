@@ -38,7 +38,7 @@ export const Layout = ({ children }: LayoutProps) => {
 
   if (status === "unauthenticated") {
     authStatus = (
-      <>
+      <div className={"flex flex-col lg:flex-row gap-2"}>
         <a
           className={"cursor-pointer"}
           onClick={async () => await signIn("google")}
@@ -51,7 +51,7 @@ export const Layout = ({ children }: LayoutProps) => {
         >
           sign in with twitter
         </a>
-      </>
+      </div>
     );
   }
 
@@ -80,8 +80,8 @@ export const Layout = ({ children }: LayoutProps) => {
         />
       </Head>
 
-      <nav className={"mb-6 flex "}>
-        <div className={"flex flex-col lg:flex-row gap-2"}>
+      <nav className={"mb-6 flex"}>
+        <div className={"grid grid-cols-2 lg:flex gap-2"}>
           <NavItem href={"/"} text={"Everything"} />
           <NavItem href={"/g/biography"} text={"Biography"} />
           <NavItem href={"/g/business"} text={"Business"} />
