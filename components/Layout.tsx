@@ -99,7 +99,7 @@ export const Layout = ({ children }: LayoutProps) => {
           <NavItem href={"/g/philosophy"} text={"Philosophy"} />
           <NavItem href={"/g/tech"} text={"Tech"} />
           <span className={"hidden lg:contents"}>•</span>
-          <NavItem href={"/"} text={"Saved"} Icon={FiBookmark} />
+          <NavItem href={"/saved"} text={"Saved"} Icon={FiBookmark} />
         </div>
 
         <div className={"flex flex-1 justify-end gap-2"}>{authStatus}</div>

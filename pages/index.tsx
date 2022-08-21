@@ -5,9 +5,7 @@ import type { InferGetStaticPropsType } from "next/types";
 import { prisma } from "utils/prisma";
 import { Book, defaultBookSelect } from "utils/types";
 
-const IndexPage = ({
-  books,
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Index = ({ books }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
@@ -79,4 +77,4 @@ export const getStaticProps = async () => {
   };
 };
 
-export default IndexPage;
+export default Index;

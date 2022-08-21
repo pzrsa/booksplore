@@ -19,6 +19,13 @@ export const defaultBookSelect = Prisma.validator<Prisma.BookSelect>()({
   createdAt: false,
 });
 
+export const defaultUserSelect = Prisma.validator<Prisma.UserSelect>()({
+  id: false,
+  name: true,
+  email: true,
+  saves: true,
+});
+
 export type Book = {
   title: string;
   author: string;
