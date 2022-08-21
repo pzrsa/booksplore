@@ -48,7 +48,7 @@ export const Layout = ({ children }: LayoutProps) => {
 
   if (status === "unauthenticated") {
     authStatus = (
-      <div className={"flex flex-col lg:flex-row gap-2"}>
+      <div className={"flex flex-col lg:flex-row gap-2 font-semibold"}>
         <a
           className={"cursor-pointer"}
           onClick={async () => await signIn("google")}
@@ -71,7 +71,7 @@ export const Layout = ({ children }: LayoutProps) => {
         <p className={"font-semibold"}>{session.user?.name}</p>
         <span>•</span>
         <a
-          className={"cursor-pointer"}
+          className={"cursor-pointer font-semibold"}
           onClick={async () => await signOut({ redirect: false })}
         >
           sign out
@@ -84,10 +84,6 @@ export const Layout = ({ children }: LayoutProps) => {
     <>
       <Head>
         <title>Booksplore - Explore your next read</title>
-        <link
-          rel="icon"
-          href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>"
-        />
       </Head>
 
       <nav className={"mb-6 flex"}>

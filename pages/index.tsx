@@ -45,8 +45,8 @@ export const getStaticProps = async () => {
   );
 
   const allBooks: Book[] = [];
-  const data = (await res.blob()).stream();
-  data
+  (await res.blob())
+    .stream()
     .pipe(csvParser())
     .on("data", (data) => allBooks.push(data))
     .on("end", () => {
