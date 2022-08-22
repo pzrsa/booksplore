@@ -87,5 +87,7 @@ model Save {
   bookId    String @unique @map("book_id")
   book      Book   @relation(fields: [bookId], references: [id], onDelete: Cascade)
 
+  createdAt DateTime @default(now()) @map("created_at")
+
   @@map("saves")
 }

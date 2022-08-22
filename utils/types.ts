@@ -13,7 +13,15 @@ export const defaultBookSelect = Prisma.validator<Prisma.BookSelect>()({
       createdAt: false,
     },
   },
-  saves: true,
+  saves: {
+    select: {
+      id: true,
+      creatorId: false,
+      creator: false,
+      bookId: false,
+      createdAt: false,
+    },
+  },
   asin: true,
   isbn13: true,
   createdAt: false,
@@ -29,6 +37,7 @@ export const defaultUserSelect = Prisma.validator<Prisma.UserSelect>()({
       creatorId: false,
       creator: false,
       bookId: false,
+      createdAt: false,
       book: {
         select: {
           id: true,
@@ -43,12 +52,23 @@ export const defaultUserSelect = Prisma.validator<Prisma.UserSelect>()({
               createdAt: false,
             },
           },
-          saves: true,
+          saves: {
+            select: {
+              id: true,
+              creatorId: false,
+              creator: false,
+              bookId: false,
+              createdAt: false,
+            },
+          },
           asin: true,
           isbn13: true,
           createdAt: false,
         },
       },
+    },
+    orderBy: {
+      createdAt: "desc",
     },
   },
 });
