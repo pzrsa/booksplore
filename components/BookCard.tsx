@@ -12,25 +12,32 @@ const BookCard: React.FC<BookCardProps> = ({ book, hideGenre }) => {
     <div>
       <div className={"group relative"}>
         <div className="aspect-w-4 aspect-h-6 rounded-md overflow-hidden group-hover:opacity-75 transition-all">
-          <Image
-            src={`https://images-eu.ssl-images-amazon.com/images/P/${book.asin}._LZZZZZZZ_.jpg`}
-            alt={`${book.title} cover`}
-            layout={"fill"}
-            className={"object-cover"}
-          />
-        </div>
-        <div className="mt-4 flex justify-between">
           <div>
-            <h3 className="text-md">
-              <Link href={`/b/${book.isbn13}`}>
-                <a>
-                  <span aria-hidden="true" className="absolute inset-0" />
-                  {book.title}
-                </a>
-              </Link>
-            </h3>
+            <span className="absolute inset-0" />
+            <Link href={`/b/${book.isbn13}`}>
+              <a>
+                <Image
+                  src={`https://images-eu.ssl-images-amazon.com/images/P/${book.asin}._LZZZZZZZ_.jpg`}
+                  alt={`${book.title} cover`}
+                  layout={"fill"}
+                  className={"object-cover"}
+                />
+              </a>
+            </Link>
           </div>
         </div>
+      </div>
+      <div className="mt-4 flex justify-between">
+        <h3 className="text-md hover:underline">
+          <Link href={`/b/${book.isbn13}`}>
+            <a>{book.title}</a>
+          </Link>
+        </h3>
+        <p className="text-sm hover:underline">
+          <Link href={`/`}>
+            <a>Save</a>
+          </Link>
+        </p>
       </div>
       {!hideGenre ? (
         <p className="mt-1 text-sm capitalize">
