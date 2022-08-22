@@ -1,11 +1,11 @@
-import Head from "next/head";
-import { ReactNode } from "react";
-import { useRouter } from "next/router";
-import Link from "next/link";
 import cn from "classnames";
 import { signIn, signOut, useSession } from "next-auth/react";
-import { FiBookmark } from "react-icons/fi";
+import Head from "next/head";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { ReactNode } from "react";
 import type { IconType } from "react-icons";
+import { FiBookmark } from "react-icons/fi";
 
 type NavItem = {
   href: string;
@@ -17,18 +17,24 @@ const NavItem: React.FC<NavItem> = ({ href, text, Icon }) => {
   const isActive = useRouter().asPath === href;
 
   return (
-    <Link href={href}>
-      <a className={cn(isActive ? "font-semibold italic" : "font-normal")}>
-        {Icon ? (
-          <span className={"flex items-center gap-x-1"}>
-            <Icon />
-            {text}
-          </span>
-        ) : (
-          text
-        )}
-      </a>
-    </Link>
+    <p>
+      <Link href={href}>
+        <a
+          className={cn(
+            isActive ? "font-semibold italic" : "font-normal hover:underline"
+          )}
+        >
+          {Icon ? (
+            <span className={"flex items-center gap-x-1"}>
+              <Icon />
+              {text}
+            </span>
+          ) : (
+            text
+          )}
+        </a>
+      </Link>
+    </p>
   );
 };
 
@@ -48,19 +54,23 @@ export const Layout = ({ children }: LayoutProps) => {
 
   if (status === "unauthenticated") {
     authStatus = (
-      <div className={"flex flex-col lg:flex-row gap-2 font-semibold"}>
-        <a
-          className={"cursor-pointer"}
-          onClick={async () => await signIn("google")}
-        >
-          sign in with google
-        </a>
-        <a
-          className={"cursor-pointer"}
-          onClick={async () => await signIn("twitter")}
-        >
-          sign in with twitter
-        </a>
+      <div className={"flex flex-col lg:flex-row gap-2"}>
+        <p>
+          <a
+            className={"cursor-pointer hover:underline"}
+            onClick={async () => await signIn("google")}
+          >
+            sign in with google
+          </a>
+        </p>
+        <p>
+          <a
+            className={"cursor-pointer hover:underline"}
+            onClick={async () => await signIn("twitter")}
+          >
+            sign in with twitter
+          </a>
+        </p>
       </div>
     );
   }
@@ -68,14 +78,16 @@ export const Layout = ({ children }: LayoutProps) => {
   if (status === "authenticated") {
     authStatus = (
       <>
-        <p className={"font-semibold"}>{session.user?.name}</p>
+        <p>{session.user?.name}</p>
         <span>•</span>
-        <a
-          className={"cursor-pointer font-semibold"}
-          onClick={async () => await signOut({ redirect: false })}
-        >
-          sign out
-        </a>
+        <p>
+          <a
+            className={"cursor-pointer hover:underline"}
+            onClick={async () => await signOut({ redirect: false })}
+          >
+            sign out
+          </a>
+        </p>
       </>
     );
   }
@@ -98,8 +110,12 @@ export const Layout = ({ children }: LayoutProps) => {
           <NavItem href={"/g/lifestyle"} text={"Lifestyle"} />
           <NavItem href={"/g/philosophy"} text={"Philosophy"} />
           <NavItem href={"/g/tech"} text={"Tech"} />
-          <span className={"hidden lg:contents"}>•</span>
-          <NavItem href={"/saved"} text={"Saved"} Icon={FiBookmark} />
+          <div
+            className={cn(status === "authenticated" ? "contents" : "hidden")}
+          >
+            <span className={"hidden lg:contents"}>•</span>
+            <NavItem href={"/saved"} text={"Saved"} Icon={FiBookmark} />
+          </div>
         </div>
 
         <div className={"flex flex-1 justify-end gap-2"}>{authStatus}</div>
