@@ -98,29 +98,31 @@ export const Layout = ({ children }: LayoutProps) => {
         <title>Booksplore - Explore your next read</title>
       </Head>
 
-      <nav className={"mb-6 flex"}>
-        <div className={"grid grid-cols-2 lg:flex gap-2"}>
-          <NavItem href={"/"} text={"Everything"} />
-          <NavItem href={"/g/biography"} text={"Biography"} />
-          <NavItem href={"/g/business"} text={"Business"} />
-          <NavItem href={"/g/careers"} text={"Careers"} />
-          <NavItem href={"/g/fiction"} text={"Fiction"} />
-          <NavItem href={"/g/finance"} text={"Finance"} />
-          <NavItem href={"/g/history"} text={"History"} />
-          <NavItem href={"/g/lifestyle"} text={"Lifestyle"} />
-          <NavItem href={"/g/philosophy"} text={"Philosophy"} />
-          <NavItem href={"/g/tech"} text={"Tech"} />
-          <div
-            className={cn(status === "authenticated" ? "contents" : "hidden")}
-          >
-            <span className={"hidden lg:contents"}>•</span>
-            <NavItem href={"/saved"} text={"Saved"} Icon={FiBookmark} />
+      <div className={"px-4 py-2"}>
+        <nav className={"mb-6 flex"}>
+          <div className={"grid grid-cols-2 lg:flex gap-2"}>
+            <NavItem href={"/"} text={"Everything"} />
+            <NavItem href={"/g/biography"} text={"Biography"} />
+            <NavItem href={"/g/business"} text={"Business"} />
+            <NavItem href={"/g/careers"} text={"Careers"} />
+            <NavItem href={"/g/fiction"} text={"Fiction"} />
+            <NavItem href={"/g/finance"} text={"Finance"} />
+            <NavItem href={"/g/history"} text={"History"} />
+            <NavItem href={"/g/lifestyle"} text={"Lifestyle"} />
+            <NavItem href={"/g/philosophy"} text={"Philosophy"} />
+            <NavItem href={"/g/tech"} text={"Tech"} />
+            <div
+              className={cn(status === "authenticated" ? "contents" : "hidden")}
+            >
+              <span className={"hidden lg:contents"}>•</span>
+              <NavItem href={"/saved"} text={"Saved"} Icon={FiBookmark} />
+            </div>
           </div>
-        </div>
 
-        <div className={"flex flex-1 justify-end gap-2"}>{authStatus}</div>
-      </nav>
-      <main>{children}</main>
+          <div className={"flex flex-1 justify-end gap-2"}>{authStatus}</div>
+        </nav>
+        <main>{children}</main>
+      </div>
     </>
   );
 };

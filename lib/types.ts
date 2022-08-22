@@ -73,7 +73,7 @@ export const defaultUserSelect = Prisma.validator<Prisma.UserSelect>()({
   },
 });
 
-export type Book = {
+export type SheetBook = {
   title: string;
   author: string;
   genre: string;
