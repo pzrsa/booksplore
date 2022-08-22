@@ -5,8 +5,8 @@ import type {
   GetServerSidePropsContext,
   InferGetServerSidePropsType,
 } from "next/types";
-import { prisma } from "../utils/prisma";
-import { defaultUserSelect } from "../utils/types";
+import { prisma } from "../lib/prisma";
+import { defaultUserSelect } from "../lib/types";
 import { authOptions } from "./api/auth/[...nextauth]";
 
 const Saved = ({

@@ -1,3 +1,4 @@
+import { prisma } from "lib/prisma";
 import Image from "next/image";
 import Link from "next/link";
 import type {
@@ -5,8 +6,7 @@ import type {
   GetStaticPropsContext,
   InferGetStaticPropsType,
 } from "next/types";
-import { prisma } from "utils/prisma";
-import { defaultBookSelect } from "../../utils/types";
+import { defaultBookSelect } from "../../lib/types";
 
 const Genre = ({ books }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (

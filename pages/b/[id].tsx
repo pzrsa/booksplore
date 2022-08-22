@@ -1,3 +1,5 @@
+import { prisma } from "lib/prisma";
+import { defaultBookSelect } from "lib/types";
 import type {
   GetStaticPaths,
   GetStaticPropsContext,
@@ -5,10 +7,8 @@ import type {
 } from "next";
 import Image from "next/image";
 import useSWR from "swr";
-import { prisma } from "utils/prisma";
-import { defaultBookSelect } from "utils/types";
-import fetcher from "../../utils/fetcher";
-import { createSave, deleteSave } from "../../utils/save";
+import fetcher from "../../lib/fetcher";
+import { createSave, deleteSave } from "../../lib/save";
 
 const Book = ({ book }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { data, mutate, error } = useSWR(`/api/save/${book!.id}`, fetcher);

@@ -1,9 +1,9 @@
 import csvParser from "csv-parser";
+import { prisma } from "lib/prisma";
+import { Book, defaultBookSelect } from "lib/types";
 import Image from "next/image";
 import Link from "next/link";
 import type { InferGetStaticPropsType } from "next/types";
-import { prisma } from "utils/prisma";
-import { Book, defaultBookSelect } from "utils/types";
 
 const Index = ({ books }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
