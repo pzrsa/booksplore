@@ -4,9 +4,10 @@ import Link from "next/link";
 
 type BookCardProps = {
   book: Omit<Book, "createdAt">;
+  hideGenre?: boolean;
 };
 
-const BookCard: React.FC<BookCardProps> = ({ book }) => {
+const BookCard: React.FC<BookCardProps> = ({ book, hideGenre }) => {
   return (
     <div>
       <div className={"group relative"}>
@@ -31,11 +32,13 @@ const BookCard: React.FC<BookCardProps> = ({ book }) => {
           </div>
         </div>
       </div>
-      <p className="mt-1 text-sm capitalize">
-        <Link href={`/g/${book.genre}`}>
-          <a className={"hover:underline"}>{book.genre}</a>
-        </Link>
-      </p>
+      {!hideGenre ? (
+        <p className="mt-1 text-sm capitalize">
+          <Link href={`/g/${book.genre}`}>
+            <a className={"hover:underline"}>{book.genre}</a>
+          </Link>
+        </p>
+      ) : null}
     </div>
   );
 };
