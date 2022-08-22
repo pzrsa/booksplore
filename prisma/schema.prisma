@@ -82,7 +82,7 @@ model User {
 
 model Save {
   id        String @id @default(cuid())
-  creatorId String @unique @map("creator_id")
+  creatorId String @map("creator_id")
   creator   User   @relation(fields: [creatorId], references: [id], onDelete: Cascade)
   bookId    String @unique @map("book_id")
   book      Book   @relation(fields: [bookId], references: [id], onDelete: Cascade)
