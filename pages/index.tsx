@@ -51,13 +51,14 @@ export const getStaticProps = async () => {
       allBooks.map(async (book) => {
         const author = await prisma.author.upsert({
           where: { name: book.author },
-          create: { name: book.author },
           update: {},
+          create: { name: book.author },
         });
         await prisma.book.upsert({
           where: {
             isbn13: book.isbn13,
           },
+          update: {},
           create: {
             title: book.title,
             authorId: author.id,
@@ -65,7 +66,6 @@ export const getStaticProps = async () => {
             isbn13: book.isbn13,
             asin: book.asin,
           },
-          update: {},
         });
       });
     });
