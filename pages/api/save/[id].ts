@@ -34,10 +34,10 @@ export default async function handler(
   switch (req.method) {
     case "GET":
       if (!save) {
-        res.status(404).json({ error: "Save not found." });
+        res.status(200).json({ status: false });
         return;
       }
-      res.status(200).json({ message: "Save exists." });
+      res.status(200).json({ status: true });
       return;
     case "PUT":
       await prisma.save.create({
