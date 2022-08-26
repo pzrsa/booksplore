@@ -5,69 +5,21 @@ import type {
   GetStaticPropsContext,
   InferGetStaticPropsType,
 } from "next";
-import Image from "next/image";
-import useSWR from "swr";
-import fetcher from "../../lib/fetcher";
-import { createSave, deleteSave } from "../../lib/save";
+import BookCard from "../../components/BookCard";
 
 const Book = ({ book }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const { data, mutate, error } = useSWR(`/api/save/${book!.id}`, fetcher);
-  let saveStatus;
-
-  if (error) {
-    saveStatus = <p>failed to load</p>;
-  }
-
-  if (!data) {
-    saveStatus = <p>loading...</p>;
-  }
-
-  if (data?.message) {
-    saveStatus = (
-      <button
-        onClick={async () => {
-          await deleteSave(book!.id);
-          await mutate(null);
-        }}
-      >
-        unsave
-      </button>
-    );
-  }
-
-  if (data?.error) {
-    saveStatus = (
-      <button
-        onClick={async () => {
-          await createSave(book!.id);
-          await mutate(null);
-        }}
-      >
-        save
-      </button>
-    );
-  }
-
   return (
-    <>
-      <Image
-        src={`https://images-eu.ssl-images-amazon.com/images/P/${book?.asin}._LZZZZZZZ_.jpg`}
-        width={400}
-        height={600}
-        alt={`${book?.title} Cover`}
-      />
-      <h1>{book?.title}</h1>
-      <h2>by {book?.author.name}</h2>
-      <h3>{book?.genre}</h3>
-      {saveStatus}
+    <div className={"max-w-2xl mx-auto"}>
+      <BookCard book={book!} />
       <a
-        href={`http://amazon.co.uk/dp/${book?.asin}`}
+        href={`http://amazon.co.uk/dp/${book!.asin}`}
         rel="prefetch noreferrer"
         target="_blank"
+        className={"hover:underline"}
       >
-        <p>buy on amazon uk</p>
+        buy on amazon uk
       </a>
-    </>
+    </div>
   );
 };
 
