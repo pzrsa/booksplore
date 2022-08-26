@@ -11,7 +11,6 @@ import { authOptions } from "./api/auth/[...nextauth]";
 const Saved = ({
   user,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  // https://www.amazon.co.uk/gp/aws/cart/add.html?ASIN.1=1988575117&ASIN.2=0241453577 is valid
   let url = "https://www.amazon.co.uk/gp/aws/cart/add.html?";
   user?.saves.forEach((save, index) => {
     url = url.concat(`ASIN.${index + 1}=${save.book.asin}&`);
