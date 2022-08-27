@@ -1,7 +1,7 @@
 import cn from "classnames";
 import { useSession } from "next-auth/react";
 import { RiBookmarkFill, RiBookmarkLine } from "react-icons/ri";
-import useSWR from "swr";
+import useSWR, { useSWRConfig } from "swr";
 import fetcher from "../lib/fetcher";
 import { createSave, deleteSave } from "../lib/save";
 
@@ -11,10 +11,14 @@ type SaveStatusProps = {
 
 const SaveStatus: React.FC<SaveStatusProps> = ({ id }) => {
   const { status } = useSession();
-  const { data, mutate, error, isValidating } = useSWR(
-    `/api/save/${id}`,
-    fetcher
-  );
+  const { mutate: userMutate } = useSWRConfig();
+
+  const {
+    data,
+    mutate: saveMutate,
+    error,
+    isValidating,
+  } = useSWR(`/api/save/${id}`, fetcher);
 
   if (error) {
     return (
@@ -38,7 +42,8 @@ const SaveStatus: React.FC<SaveStatusProps> = ({ id }) => {
         )}
         onClick={async () => {
           await createSave(id);
-          await mutate(null);
+          await saveMutate(null);
+          await userMutate("/api/me");
         }}
       >
         <RiBookmarkLine />
@@ -56,7 +61,8 @@ const SaveStatus: React.FC<SaveStatusProps> = ({ id }) => {
         )}
         onClick={async () => {
           await deleteSave(id);
-          await mutate(null);
+          await saveMutate(null);
+          await userMutate("/api/me");
         }}
       >
         <RiBookmarkFill />
