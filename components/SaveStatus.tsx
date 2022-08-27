@@ -38,7 +38,7 @@ const SaveStatus: React.FC<SaveStatusProps> = ({ id }) => {
         className={cn(
           status === "unauthenticated"
             ? "hidden"
-            : "text-lg hover:underline cursor-pointer"
+            : "text-xl hover:underline cursor-pointer"
         )}
         onClick={async () => {
           await createSave(id);
@@ -57,7 +57,7 @@ const SaveStatus: React.FC<SaveStatusProps> = ({ id }) => {
         className={cn(
           status === "unauthenticated"
             ? "hidden"
-            : "text-lg hover:underline cursor-pointer"
+            : "text-xl hover:underline cursor-pointer"
         )}
         onClick={async () => {
           await deleteSave(id);
