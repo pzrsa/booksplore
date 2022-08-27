@@ -51,6 +51,8 @@ export const getStaticProps = async () => {
 
   const books = await prisma.book.findMany({ select: defaultBookSelect });
 
+  await prisma.$disconnect();
+
   return {
     props: { books },
     revalidate: 60,
