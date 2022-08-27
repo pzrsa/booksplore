@@ -83,7 +83,7 @@ export const Layout = ({ children }: LayoutProps) => {
         <p>
           <a
             className={"cursor-pointer hover:underline"}
-            onClick={async () => await signOut({ redirect: false })}
+            onClick={async () => await signOut()}
           >
             sign out
           </a>
