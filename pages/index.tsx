@@ -21,6 +21,8 @@ export const getStaticProps = async () => {
     `https://docs.google.com/spreadsheets/d/${process.env.SHEETS_ID}/gviz/tq?tqx=out:csv&sheet=sheet1`
   );
 
+  await prisma.$connect();
+
   const allBooks: SheetBook[] = [];
   (await res.blob())
     .stream()
