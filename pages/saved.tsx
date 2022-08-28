@@ -1,14 +1,22 @@
 import { prisma } from "lib/prisma";
-import { GetServerSidePropsContext } from "next";
+import type {
+  GetServerSidePropsContext,
+  InferGetServerSidePropsType,
+} from "next";
 import { unstable_getServerSession } from "next-auth/next";
+import { SWRConfig } from "swr";
 import SavedBooks from "../components/SavedBooks";
 import { defaultUserSelect } from "../lib/types";
 import { authOptions } from "./api/auth/[...nextauth]";
 
-const Saved = ({}) => {
+const Saved = ({
+  fallback,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
     <div>
-      <SavedBooks />
+      <SWRConfig value={{ fallback }}>
+        <SavedBooks />
+      </SWRConfig>
     </div>
   );
 };

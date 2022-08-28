@@ -5,6 +5,8 @@ import BookCard from "./BookCard";
 const SavedBooks = () => {
   const { data, error, isValidating } = useSWR("/api/me", fetcher);
 
+  console.log(data);
+
   if (error) {
     return <p>failed to load</p>;
   }
