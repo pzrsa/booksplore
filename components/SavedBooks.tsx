@@ -26,9 +26,9 @@ const SavedBooks = () => {
               href={url}
               rel="prefetch noreferrer"
               target="_blank"
-              className="hover:text-neutral-500 dark:group-hover:text-neutral-400 transition-all text-3xl sm:text-4xl font-bold"
+              className="hover:underline text-3xl sm:text-4xl font-bold"
             >
-              add to amazon cart
+              Add books to Amazon cart
             </a>
           </h1>
           <div className="gap-y-10 xl:gap-x-6 gap-x-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7">
