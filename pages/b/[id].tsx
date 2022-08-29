@@ -1,3 +1,4 @@
+import SaveStatus from "components/SaveStatus";
 import { prisma } from "lib/prisma";
 import { defaultBookSelect } from "lib/types";
 import type {
@@ -5,20 +6,47 @@ import type {
   GetStaticPropsContext,
   InferGetStaticPropsType,
 } from "next";
-import BookCard from "../../components/BookCard";
+import Image from "next/image";
+import Link from "next/link";
 
 const Book = ({ book }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <div className={"max-w-2xl mx-auto"}>
-      <BookCard book={book!} />
-      <a
-        href={`http://amazon.co.uk/dp/${book!.asin}`}
-        rel="prefetch noreferrer"
-        target="_blank"
-        className={"hover:underline"}
-      >
-        buy on amazon uk
-      </a>
+      <div>
+        <div className="aspect-w-4 aspect-h-6 rounded-md overflow-hidden">
+          <div>
+            <Image
+              src={`https://images-eu.ssl-images-amazon.com/images/P/${
+                book!.asin
+              }._LZZZZZZZ_.jpg`}
+              alt={`${book!.title} cover`}
+              layout={"fill"}
+              className={"object-cover"}
+            />
+          </div>
+        </div>
+        <div className="mt-4 flex justify-between">
+          <h3 className="text-xl">
+            {book!.title} • {book!.author.name}
+          </h3>
+          <SaveStatus id={book!.id} />
+        </div>
+        <p className="mt-1 text-lg capitalize">
+          <Link href={`/g/${book!.genre}`}>
+            <a className={"hover:underline"}>{book!.genre}</a>
+          </Link>
+        </p>
+        <p className="mt-1 text-md font-bold">
+          <a
+            href={`http://amazon.co.uk/dp/${book!.asin}`}
+            rel="prefetch noreferrer"
+            target="_blank"
+            className={"hover:underline"}
+          >
+            Buy on Amazon
+          </a>
+        </p>
+      </div>
     </div>
   );
 };
