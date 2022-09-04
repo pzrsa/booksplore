@@ -121,7 +121,9 @@ export const Layout = ({ children }: LayoutProps) => {
 
           <div className={"flex flex-1 justify-end gap-2"}>{authStatus}</div>
         </nav>
-        <main>{children}</main>
+        <main className="mx-auto max-w-full sm:max-w-xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-7xl">
+          {children}
+        </main>
       </div>
     </>
   );
