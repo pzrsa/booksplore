@@ -1,4 +1,3 @@
-import SaveStatus from "components/SaveStatus";
 import { prisma } from "lib/prisma";
 import { defaultBookSelect } from "lib/types";
 import type {
@@ -29,7 +28,6 @@ const Book = ({ book }: InferGetStaticPropsType<typeof getStaticProps>) => {
           <h3 className="text-xl">
             {book!.title} • {book!.author.name}
           </h3>
-          <SaveStatus id={book!.id} />
         </div>
         <p className="mt-1 text-lg capitalize">
           <Link href={`/g/${book!.genre}`}>

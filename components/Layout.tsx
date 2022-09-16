@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";
 import type { IconType } from "react-icons";
-import { FiBookmark } from "react-icons/fi";
 
 type NavItem = {
   href: string;
@@ -111,14 +110,7 @@ export const Layout = ({ children }: LayoutProps) => {
             <NavItem href={"/g/lifestyle"} text={"Lifestyle"} />
             <NavItem href={"/g/philosophy"} text={"Philosophy"} />
             <NavItem href={"/g/tech"} text={"Tech"} />
-            <div
-              className={cn(status === "authenticated" ? "contents" : "hidden")}
-            >
-              <span className={"hidden lg:contents"}>•</span>
-              <NavItem href={"/saved"} text={"Saved"} Icon={FiBookmark} />
-            </div>
           </div>
-
           <div className={"flex flex-1 justify-end gap-2"}>{authStatus}</div>
         </nav>
         <main className="mx-auto max-w-full sm:max-w-xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-7xl">

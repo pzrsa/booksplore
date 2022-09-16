@@ -1,7 +1,6 @@
 import { Book } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
-import SaveStatus from "./SaveStatus";
 
 type BookCardProps = {
   book: Omit<Book, "createdAt">;
@@ -34,7 +33,6 @@ const BookCard: React.FC<BookCardProps> = ({ book, hideGenre }) => {
             <a>{book.title}</a>
           </Link>
         </h3>
-        <SaveStatus id={book.id} />
       </div>
       {!hideGenre ? (
         <p className="mt-1 text-sm capitalize">
