@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -9,16 +10,18 @@ import (
 func setupRouter() *gin.Engine {
 	r := gin.Default()
 
-	// Ping test
-	r.GET("/ping", func(c *gin.Context) {
-		c.String(http.StatusOK, "pong")
+	r.GET("/", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{"hello": "world"})
 	})
 
 	return r
 }
 
 func main() {
+	const port = ":4000"
+
 	r := setupRouter()
-	// Listen and Server in 0.0.0.0:8080
-	r.Run(":4000")
+	if err := r.Run(port); err != nil {
+		log.Fatalf("server: startup failed: %s", err)
+	}
 }
