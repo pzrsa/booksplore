@@ -1,10 +1,10 @@
-package api
+package routes
 
 import "github.com/gin-gonic/gin"
 
-// GET /v1/pings
+// GET /v1/ping
 func GetPing(r *gin.RouterGroup) {
-	r.GET("/pings", func(c *gin.Context) {
+	r.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{"data": "pong"})
 	})
 }
