@@ -1,9 +1,9 @@
 package main
 
 import (
+	"booksplore/api"
 	"booksplore/models"
 	"log"
-	"net/http"
 	"os"
 
 	"github.com/gin-gonic/gin"
@@ -14,10 +14,13 @@ import (
 
 func setupRouter() *gin.Engine {
 	r := gin.Default()
+	r.SetTrustedProxies([]string{"locahost:4000"})
 
-	r.GET("/", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{"hello": "world"})
-	})
+	v1 := r.Group("v1")
+	{
+		// Ping
+		api.Ping(v1)
+	}
 
 	return r
 }
@@ -33,7 +36,6 @@ func main() {
 		log.Fatalf("server: failed to connect database: %s", err)
 	}
 
-	// Migrate the schema
 	db.AutoMigrate(&models.User{})
 
 	const port = ":4000"

@@ -1,8 +1,7 @@
 package models
 
 type User struct {
-	ID string
-
+	ID        string
 	Provider  string
 	Email     string
 	Name      string
@@ -11,4 +10,3 @@ type User struct {
 	CreatedAt int
 	UpdatedAt int
 }
-
