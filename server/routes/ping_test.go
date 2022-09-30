@@ -23,5 +23,5 @@ func TestGetPing(t *testing.T) {
 		t.Fatal(err)
 	}
 	assert.Equal(t, 200, w.Code)
-	assert.Equal(t, gin.H{"data": "pong"}, got)
+	assert.Equal(t, gin.H{"message": "pong", "data": nil}, got)
 }
