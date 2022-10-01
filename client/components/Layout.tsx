@@ -1,5 +1,4 @@
 import cn from "classnames";
-import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -40,57 +39,6 @@ const NavItem: React.FC<NavItem> = ({ href, text, Icon }) => {
 type LayoutProps = { children: ReactNode };
 
 export const Layout = ({ children }: LayoutProps) => {
-  const { data: session, status } = useSession();
-
-  let authStatus;
-  if (status === "loading") {
-    authStatus = (
-      <>
-        <p>loading...</p>
-      </>
-    );
-  }
-
-  if (status === "unauthenticated") {
-    authStatus = (
-      <div className={"flex flex-col lg:flex-row gap-2"}>
-        <p>
-          <a
-            className={"cursor-pointer hover:underline"}
-            onClick={async () => await signIn("google")}
-          >
-            sign in with google
-          </a>
-        </p>
-        <p>
-          <a
-            className={"cursor-pointer hover:underline"}
-            onClick={async () => await signIn("twitter")}
-          >
-            sign in with twitter
-          </a>
-        </p>
-      </div>
-    );
-  }
-
-  if (status === "authenticated") {
-    authStatus = (
-      <>
-        <p>{session.user?.name}</p>
-        <span>•</span>
-        <p>
-          <a
-            className={"cursor-pointer hover:underline"}
-            onClick={async () => await signOut()}
-          >
-            sign out
-          </a>
-        </p>
-      </>
-    );
-  }
-
   return (
     <>
       <Head>
@@ -111,7 +59,6 @@ export const Layout = ({ children }: LayoutProps) => {
             <NavItem href={"/g/philosophy"} text={"Philosophy"} />
             <NavItem href={"/g/tech"} text={"Tech"} />
           </div>
-          <div className={"flex flex-1 justify-end gap-2"}>{authStatus}</div>
         </nav>
         <main className="mx-auto max-w-full sm:max-w-xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-7xl">
           {children}
