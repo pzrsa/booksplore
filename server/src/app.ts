@@ -1,16 +1,10 @@
 import express from "express";
-import users from "./routes/users";
-
-const API_ROUTES = {
-  "/users": users,
-};
+import mountRoutes from "./routes";
 
 const buildApp = (): express.Application => {
   const app = express();
 
-  for (const [route, router] of Object.entries(API_ROUTES)) {
-    app.use(route, router);
-  }
+  mountRoutes(app);
 
   return app;
 };
