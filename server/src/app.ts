@@ -10,7 +10,13 @@ dotenv.config();
 const buildApp = (): express.Application => {
   const app = express();
 
-  app.use(session({ secret: "lol", resave: true, saveUninitialized: true }));
+  app.use(
+    session({
+      secret: process.env.SESSION_SECRET as string,
+      resave: true,
+      saveUninitialized: true,
+    })
+  );
 
   mountRoutes(app);
   mountPassport(app);
