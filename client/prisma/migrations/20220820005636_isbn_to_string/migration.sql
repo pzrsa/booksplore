@@ -1,2 +1,0 @@
--- AlterTable
-ALTER TABLE "books" ALTER COLUMN "isbn13" SET DATA TYPE TEXT;
