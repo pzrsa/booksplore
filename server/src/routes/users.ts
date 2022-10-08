@@ -1,5 +1,4 @@
 import { Router } from "express";
-import passport from "passport";
 
 const router = Router();
 
@@ -18,26 +17,5 @@ router.get("/", async (_, res) => {
     },
   });
 });
-
-router.get("/auth/twitter", passport.authenticate("twitter"));
-router.get(
-  "/auth/twitter/callback",
-  passport.authenticate("twitter"),
-  (_, res) => {
-    res.redirect("back");
-  }
-);
-
-router.get(
-  "/auth/google",
-  passport.authenticate("google", { scope: ["profile"] })
-);
-router.get(
-  "/auth/google/callback",
-  passport.authenticate("google"),
-  (_, res) => {
-    res.redirect("back");
-  }
-);
 
 export default router;

@@ -23,7 +23,7 @@ const mountPassport = (app: Application) => {
       {
         consumerKey: process.env.TWITTER_KEY as string,
         consumerSecret: process.env.TWITTER_SECRET as string,
-        callbackURL: "/users/auth/twitter/callback",
+        callbackURL: "/auth/twitter/callback",
       },
       (_, __, profile, done) => {
         done(null, profile);
@@ -36,7 +36,7 @@ const mountPassport = (app: Application) => {
       {
         clientID: process.env.GOOGLE_KEY as string,
         clientSecret: process.env.GOOGLE_SECRET as string,
-        callbackURL: "/users/auth/google/callback",
+        callbackURL: "/auth/google/callback",
       },
       (_, __, profile, done) => {
         done(null, profile);

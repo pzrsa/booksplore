@@ -50,11 +50,11 @@ export const Layout = ({ children }: LayoutProps) => {
         <nav className={"mb-6 flex"}>
           <div className={"grid grid-cols-2 lg:flex gap-2"}>
             <NavItem
-              href={`${API_BASE_URL}/users/auth/twitter`}
+              href={`${API_BASE_URL}/auth/twitter`}
               text={"sign in with twitter"}
             />
             <NavItem
-              href={`${API_BASE_URL}/users/auth/google`}
+              href={`${API_BASE_URL}/auth/google`}
               text={"sign in with google"}
             />
           </div>

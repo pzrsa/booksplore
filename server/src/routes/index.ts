@@ -1,8 +1,10 @@
 import { Application } from "express";
+import auth from "./auth";
 import users from "./users";
 
 const APP_START_TIME = Date.now();
 const API_ROUTES = {
+  "/auth": auth,
   "/users": users,
 };
 
