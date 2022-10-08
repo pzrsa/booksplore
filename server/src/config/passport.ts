@@ -6,6 +6,14 @@ const mountPassport = (app: Application) => {
   app.use(passport.initialize());
   app.use(passport.session());
 
+  passport.serializeUser<any, any>((_, user, done) => {
+    done(null, user);
+  });
+
+  passport.deserializeUser((_, done) => {
+    done(null, null);
+  });
+
   const twitterStrategy = passportTwitter.Strategy;
   passport.use(
     new twitterStrategy(
@@ -14,8 +22,8 @@ const mountPassport = (app: Application) => {
         consumerSecret: process.env.TWITTER_SECRET as string,
         callbackURL: "/users/auth/twitter/callback",
       },
-      (_, __, ___, done) => {
-        return done(null, null);
+      (_, __, profile, done) => {
+        done(null, profile);
       }
     )
   );

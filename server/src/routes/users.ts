@@ -22,9 +22,9 @@ router.get("/", async (_, res) => {
 router.get("/auth/twitter", passport.authenticate("twitter"));
 router.get(
   "/auth/twitter/callback",
-  passport.authenticate("twitter"),
+  passport.authenticate("twitter", { failureMessage: true }),
   (_, res) => {
-    res.redirect("/");
+    res.redirect("back");
   }
 );
 
