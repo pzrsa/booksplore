@@ -174,6 +174,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/passport-google-oauth@npm:^1.0.42":
+  version: 1.0.42
+  resolution: "@types/passport-google-oauth@npm:1.0.42"
+  dependencies:
+    "@types/express": "*"
+    "@types/passport": "*"
+  checksum: db79928d9e11077cceaa760806bb51be24744e8272329d5a43853de1ec808f97c4b2194f181edeb0348d041e3508180654d686ef55969578839b583d6531b1a5
+  languageName: node
+  linkType: hard
+
 "@types/passport-twitter@npm:^1.0.37":
   version: 1.0.37
   resolution: "@types/passport-twitter@npm:1.0.37"
@@ -332,6 +342,13 @@ __metadata:
   version: 1.0.2
   resolution: "balanced-match@npm:1.0.2"
   checksum: 9706c088a283058a8a99e0bf91b0a2f75497f185980d9ffa8b304de1d9e58ebda7c72c07ebf01dadedaac5b2907b2c6f566f660d62bd336c3468e960403b9d65
+  languageName: node
+  linkType: hard
+
+"base64url@npm:3.x.x":
+  version: 3.0.1
+  resolution: "base64url@npm:3.0.1"
+  checksum: a77b2a3a526b3343e25be424de3ae0aa937d78f6af7c813ef9020ef98001c0f4e2323afcd7d8b2d2978996bf8c42445c3e9f60c218c622593e5fdfd54a3d6e18
   languageName: node
   linkType: hard
 
@@ -1449,6 +1466,34 @@ __metadata:
   languageName: node
   linkType: hard
 
+"passport-google-oauth1@npm:1.x.x":
+  version: 1.0.0
+  resolution: "passport-google-oauth1@npm:1.0.0"
+  dependencies:
+    passport-oauth1: 1.x.x
+  checksum: 5c87530f85924644402ad75d056c426c168a47a77012909e2c0a2ad2cf420b8a44c24e04fec300fa71ec08db39ca3b911d0c3e058093caeff260ce7d89025281
+  languageName: node
+  linkType: hard
+
+"passport-google-oauth20@npm:2.x.x":
+  version: 2.0.0
+  resolution: "passport-google-oauth20@npm:2.0.0"
+  dependencies:
+    passport-oauth2: 1.x.x
+  checksum: 1d34f4c2da059504b6a3c149b261b9063d0390c84d500fa314b3895d599d7f96ce9750e48a5b715df92fba57ef4ecb5e66d3ce99ded5cc9b17d201a06ba8701e
+  languageName: node
+  linkType: hard
+
+"passport-google-oauth@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "passport-google-oauth@npm:2.0.0"
+  dependencies:
+    passport-google-oauth1: 1.x.x
+    passport-google-oauth20: 2.x.x
+  checksum: 7cd2d19efbb4c7dc968223f2eed485641ad4ceca763b306e06e544b69d0cf02fbe54dd428830819dfde763494a1384dd969a5e50dad3e99624492c374fa3ff8a
+  languageName: node
+  linkType: hard
+
 "passport-oauth1@npm:1.x.x":
   version: 1.2.0
   resolution: "passport-oauth1@npm:1.2.0"
@@ -1457,6 +1502,19 @@ __metadata:
     passport-strategy: 1.x.x
     utils-merge: 1.x.x
   checksum: b38444da71bf3468a53599d908b45e4043c7dd04cce0ded3398a91f161ce076c5973f42ddad47e5012f8b1cccea71b60890b35560491921d0858c36b364ac471
+  languageName: node
+  linkType: hard
+
+"passport-oauth2@npm:1.x.x":
+  version: 1.6.1
+  resolution: "passport-oauth2@npm:1.6.1"
+  dependencies:
+    base64url: 3.x.x
+    oauth: 0.9.x
+    passport-strategy: 1.x.x
+    uid2: 0.0.x
+    utils-merge: 1.x.x
+  checksum: 2a5b01a884ebade01770543d3b84fbdbc45c75ca13b320b88ae59e33388bb485a27c323c2d3904058dca57065bf0e2a78c645cbb62600ced2dcdd43094259f0e
   languageName: node
   linkType: hard
 
@@ -1632,6 +1690,7 @@ __metadata:
     "@types/express-session": ^1.17.5
     "@types/node": ^18.8.3
     "@types/passport": ^1.0.11
+    "@types/passport-google-oauth": ^1.0.42
     "@types/passport-twitter": ^1.0.37
     cookie-parser: ^1.4.6
     dotenv: ^16.0.3
@@ -1639,6 +1698,7 @@ __metadata:
     express-session: ^1.17.3
     nodemon: ^2.0.20
     passport: ^0.6.0
+    passport-google-oauth: ^2.0.0
     passport-twitter: ^1.0.4
     ts-node: ^10.9.1
     typescript: ^4.8.4
@@ -1959,6 +2019,13 @@ __metadata:
   dependencies:
     random-bytes: ~1.0.0
   checksum: 07536043da9a026f4a2bc397543d0ace7587449afa1d9d2c4fd3ce76af8a5263a678788bcc429dff499ef29d45843cd5ee9d05434450fcfc19cc661229f703d1
+  languageName: node
+  linkType: hard
+
+"uid2@npm:0.0.x":
+  version: 0.0.4
+  resolution: "uid2@npm:0.0.4"
+  checksum: e92325ce2e3b7be504b19e835dbb5a8b0495031f364b08ca46745468ed0ae0f202a4fdaf99a1a2715844156efc3ab410456ae24a0f7c0ae4b0a2e9f2784edfd9
   languageName: node
   linkType: hard
 

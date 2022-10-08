@@ -53,6 +53,10 @@ export const Layout = ({ children }: LayoutProps) => {
               href={`${API_BASE_URL}/users/auth/twitter`}
               text={"sign in with twitter"}
             />
+            <NavItem
+              href={`${API_BASE_URL}/users/auth/google`}
+              text={"sign in with google"}
+            />
           </div>
         </nav>
         <main className="mx-auto xl:max-w-5xl">{children}</main>

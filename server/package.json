@@ -10,6 +10,7 @@
     "express": "^4.18.1",
     "express-session": "^1.17.3",
     "passport": "^0.6.0",
+    "passport-google-oauth": "^2.0.0",
     "passport-twitter": "^1.0.4"
   },
   "devDependencies": {
@@ -18,6 +19,7 @@
     "@types/express-session": "^1.17.5",
     "@types/node": "^18.8.3",
     "@types/passport": "^1.0.11",
+    "@types/passport-google-oauth": "^1.0.42",
     "@types/passport-twitter": "^1.0.37",
     "nodemon": "^2.0.20",
     "ts-node": "^10.9.1",
