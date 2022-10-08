@@ -15,6 +15,12 @@ const buildApp = (): express.Application => {
       secret: process.env.SESSION_SECRET as string,
       resave: true,
       saveUninitialized: true,
+      cookie: {
+        httpOnly: true,
+        signed: true,
+        sameSite: "lax",
+        maxAge: 1000 * 60 * 60 * 24 * 365 * 10, // 10 years
+      },
     })
   );
 
