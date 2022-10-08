@@ -48,21 +48,10 @@ export const Layout = ({ children }: LayoutProps) => {
       <div className={"px-4 py-2"}>
         <nav className={"mb-6 flex"}>
           <div className={"grid grid-cols-2 lg:flex gap-2"}>
-            <NavItem href={"/"} text={"Everything"} />
-            <NavItem href={"/g/biography"} text={"Biography"} />
-            <NavItem href={"/g/business"} text={"Business"} />
-            <NavItem href={"/g/careers"} text={"Careers"} />
-            <NavItem href={"/g/fiction"} text={"Fiction"} />
-            <NavItem href={"/g/finance"} text={"Finance"} />
-            <NavItem href={"/g/history"} text={"History"} />
-            <NavItem href={"/g/lifestyle"} text={"Lifestyle"} />
-            <NavItem href={"/g/philosophy"} text={"Philosophy"} />
-            <NavItem href={"/g/tech"} text={"Tech"} />
+            <NavItem href={"/"} text={"home"} />
           </div>
         </nav>
-        <main className="mx-auto max-w-full sm:max-w-xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-7xl">
-          {children}
-        </main>
+        <main className="mx-auto xl:max-w-5xl">{children}</main>
       </div>
     </>
   );
