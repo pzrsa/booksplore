@@ -3,6 +3,7 @@ import express, { Application } from "express";
 import session from "express-session";
 import mountPassport from "./config/passport";
 import mountRoutes from "./routes";
+import { __prod__ } from "./utils/constants";
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ const buildApp = (): express.Application => {
         signed: true,
         sameSite: "lax",
         maxAge: 1000 * 60 * 60 * 24 * 365 * 10, // 10 years
+        secure: __prod__,
       },
     })
   );
