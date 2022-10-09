@@ -7,22 +7,22 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 
-@Entity({ name: "users" })
-export class User extends BaseEntity {
+@Entity({ name: "accounts" })
+export class Account extends BaseEntity {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column()
-  name: string;
+  provider: string;
 
-  @Column()
-  username: string;
+  @Column({ name: "provider_account_id" })
+  providerAccountId: string;
 
-  @Column()
-  email: string;
+  @Column({ name: "refresh_token" })
+  refreshToken: string;
 
-  @Column()
-  image: string;
+  @Column({ name: "access_token" })
+  accessToken: string;
 
   @Column({ name: "created_at" })
   createdAt: number;
