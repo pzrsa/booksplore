@@ -1,6 +1,9 @@
 import app from "./app";
+import { AppDataSource } from "./config/data-source";
 
 const startServer = async (port: number) => {
+  await AppDataSource.initialize();
+
   return app.listen(port, () => {
     console.info(`Server up on port ${port}`);
   });
