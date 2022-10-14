@@ -4,13 +4,20 @@ import {
   BeforeUpdate,
   Column,
   Entity,
+  JoinColumn,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
+import { User } from "./User";
 
 @Entity({ name: "accounts" })
 export class Account extends BaseEntity {
   @PrimaryGeneratedColumn("uuid")
   id: string;
+
+  @OneToOne(() => User)
+  @JoinColumn({ name: "user_id" })
+  user: User;
 
   @Column()
   provider: string;
