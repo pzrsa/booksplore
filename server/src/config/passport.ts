@@ -32,7 +32,6 @@ const mountPassport = (app: Application) => {
           user: {
             username: profile.username,
             name: profile.displayName,
-            email: profile.emails?.at(0)?.value,
             image: profile.photos?.at(0)?.value,
           },
           provider: profile.provider,
