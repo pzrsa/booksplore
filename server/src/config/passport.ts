@@ -27,7 +27,6 @@ const mountPassport = (app: Application) => {
         callbackURL: "/auth/twitter/callback",
       },
       async (accessToken, refreshToken, profile, done) => {
-        console.log(profile);
         await Account.create({
           user: {
             username: profile.username,
@@ -52,7 +51,17 @@ const mountPassport = (app: Application) => {
         clientSecret: process.env.GOOGLE_SECRET as string,
         callbackURL: "/auth/google/callback",
       },
-      (_, __, profile, done) => {
+      async (accessToken, _, profile, done) => {
+        await Account.create({
+          user: {
+            name: profile.displayName,
+            image: profile.photos?.at(0)?.value,
+          },
+          provider: profile.provider,
+          providerAccountId: profile.id,
+          accessToken: accessToken,
+        }).save();
+
         done(null, profile);
       }
     )
