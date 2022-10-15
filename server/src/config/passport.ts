@@ -2,6 +2,7 @@ import { Application } from "express";
 import passport from "passport";
 import passportGoogle from "passport-google-oauth";
 import passportTwitter from "passport-twitter";
+import { Account } from "../entities/Account";
 
 const mountPassport = (app: Application) => {
   app.use(passport.initialize());
@@ -25,7 +26,21 @@ const mountPassport = (app: Application) => {
         consumerSecret: process.env.TWITTER_SECRET as string,
         callbackURL: "/auth/twitter/callback",
       },
-      (_, __, profile, done) => {
+      async (accessToken, refreshToken, profile, done) => {
+        console.log(profile);
+        await Account.create({
+          user: {
+            username: profile.username,
+            name: profile.displayName,
+            email: profile.emails?.at(0)?.value,
+            image: profile.photos?.at(0)?.value,
+          },
+          provider: profile.provider,
+          providerAccountId: profile.id,
+          accessToken: accessToken,
+          refreshToken: refreshToken,
+        }).save();
+
         done(null, profile);
       }
     )
