@@ -15,7 +15,7 @@ export class Account extends BaseEntity {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @OneToOne(() => User)
+  @OneToOne(() => User, { cascade: true })
   @JoinColumn({ name: "user_id" })
   user: User;
 
