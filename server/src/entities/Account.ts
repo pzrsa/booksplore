@@ -25,10 +25,10 @@ export class Account extends BaseEntity {
   @Column({ name: "provider_account_id" })
   providerAccountId: string;
 
-  @Column({ name: "refresh_token" })
+  @Column({ name: "refresh_token", nullable: true })
   refreshToken: string;
 
-  @Column({ name: "access_token" })
+  @Column({ name: "access_token", nullable: true })
   accessToken: string;
 
   @Column({ name: "created_at" })
